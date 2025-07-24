@@ -8,7 +8,6 @@ import SlotView from './components/SlotView';
 import CalendarView from './components/CalenderView';
 import { FaMoon, FaSun } from 'react-icons/fa';
 
-
 const lightTheme = {
   background: '#f5f7fa',
   panelBackground: '#fff',
@@ -84,7 +83,7 @@ const ThemeToggle = styled.button`
 
 const AppContainer = styled.div`
   font-family: 'Segoe UI', sans-serif;
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
   background: ${props => props.theme.background};
@@ -94,7 +93,6 @@ const AppContainer = styled.div`
     padding: 10px;
   }
 `;
-
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -185,7 +183,7 @@ const NavArrow = styled.button`
 
 const DateStrip = styled.div`
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
   margin: 15px 0;
   overflow-x: auto;
   padding-bottom: 5px;
@@ -198,7 +196,7 @@ const DateStrip = styled.div`
 
 const DateBox = styled.div`
   min-width: 80px;
-  padding: 8px;
+  padding: 15px;
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
@@ -235,10 +233,16 @@ const DayNumber = styled.div`
 const SectionHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 15px;
   flex-wrap: wrap;
   gap: 10px;
+  width: 100%;
+
+  > div:first-child {
+    flex: 1;
+    min-width: 200px;
+  }
 `;
 
 const SectionTitle = styled.h3`
@@ -255,9 +259,17 @@ const SectionSubtitle = styled.p`
 `;
 
 const ColorLegend = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
   gap: 10px;
-  flex-wrap: wrap;
+  justify-content: end;
+  margin-left: auto;
+  max-width: 300px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, auto);
+    max-width: 200px;
+  }
 `;
 
 const LegendItem = styled.div`
@@ -295,6 +307,8 @@ const ProviderCard = styled.div`
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   background: ${props => props.theme.cardBackground};
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -305,30 +319,45 @@ const ProviderCard = styled.div`
   }
 `;
 
-const ProviderHeader = styled.div`
+const CardContent = styled.div`
   display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid ${props => props.theme.border};
+  gap: 20px;
+  width: 100%;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 15px;
+  }
+`;
+
+const LeftContent = styled.div`
+  display: flex;
+  gap: 15px;
+  min-width: 250px;
+`;
+
+const RightContent = styled.div`
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
 `;
 
 const ProviderImage = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin-right: 15px;
   object-fit: cover;
   border: 2px solid ${props => props.theme.border};
 `;
 
 const ProviderInfo = styled.div`
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
 
 const ProviderName = styled.div`
   font-weight: 600;
-  margin-bottom: 2px;
   color: ${props => props.theme.text};
 `;
 
@@ -343,6 +372,7 @@ const ViewCalendarLink = styled.a`
   font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
+  margin-top: 5px;
 
   &:hover {
     text-decoration: underline;
@@ -465,11 +495,11 @@ const App = () => {
                 </LegendItem>
                 <LegendItem>
                   <LegendColor type="online-booked"/>
-                  <span>Booked (Online)</span>
+                  <span>Booked Online</span>
                 </LegendItem>
                 <LegendItem>
                   <LegendColor type="offline-booked"/>
-                  <span>Booked (Offline)</span>
+                  <span>Booked Offline</span>
                 </LegendItem>
                 <LegendItem>
                   <LegendColor type="blocked"/>
@@ -495,21 +525,25 @@ const App = () => {
 
               return (
                 <ProviderCard key={provider.id} type={provider.provider_usertype}>
-                  <ProviderHeader>
-                    <ProviderImage src={provider.image} alt={provider.name} />
-                    <ProviderInfo>
-                      <ProviderName>{provider.name}</ProviderName>
-                      <ProviderClinic>{provider.clinic_details.name}</ProviderClinic>
-                    </ProviderInfo>
-                    <ViewCalendarLink onClick={() => {
-                      setSelectedProvider(provider);
-                      setShowCalendar(true);
-                    }}>
-                      View Calendar &gt;
-                    </ViewCalendarLink>
-                  </ProviderHeader>
-                  
-                  <SlotView slots={slots} />
+                  <CardContent>
+                    <LeftContent>
+                      <ProviderImage src={provider.image} alt={provider.name} />
+                      <ProviderInfo>
+                        <ProviderName>{provider.name}</ProviderName>
+                        <ProviderClinic>{provider.clinic_details.name}</ProviderClinic>
+                        <ViewCalendarLink onClick={() => {
+                          setSelectedProvider(provider);
+                          setShowCalendar(true);
+                        }}>
+                          View Calendar &gt;
+                        </ViewCalendarLink>
+                      </ProviderInfo>
+                    </LeftContent>
+                    
+                    <RightContent>
+                      <SlotView slots={slots} />
+                    </RightContent>
+                  </CardContent>
                 </ProviderCard>
               );
             })}

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 const SlotsContainer = styled.div`
   position: relative;
   margin-top: 15px;
+  padding: 0 40px; /* Add padding to make space for arrows */
 `;
 
 const SlotsGrid = styled.div`
@@ -64,22 +65,22 @@ const NavButton = styled.button`
   &:disabled {
     background: #ccc;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 `;
 
 const PrevButton = styled(NavButton)`
-  left: -40px;
+  left: 0;
 `;
 
 const NextButton = styled(NavButton)`
-  right: -40px;
+  right: 0;
 `;
 
 const SlotView = ({ slots }) => {
   const [columnOffset, setColumnOffset] = useState(0);
   const columnsPerPage = 4;
 
-  
   const allColumns = [];
   for (let hour = 8; hour < 24; hour++) {
     const columnSlots = [
@@ -88,7 +89,6 @@ const SlotView = ({ slots }) => {
       { time: `${hour}:30`, status: null },
       { time: `${hour}:45`, status: null }
     ];
-    
     
     slots.forEach(slot => {
       const [slotHour, slotMinute] = slot.time.split(':').map(Number);
