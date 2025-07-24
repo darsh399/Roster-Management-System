@@ -33,3 +33,17 @@ A responsive calendar application for healthcare providers with dark/light mode 
 
 ## Available Scripts
 - `start`: Runs the app
+
+## Important Note About Provisional Data
+
+The application uses sample data from `src/provisionalData.json`. To see available slots in the UI:
+
+1. Open `src/provisionalData.json` in your code editor
+2. Find all date fields (they appear as `"date": "YYYY-MM-DD"`)
+3. Change these dates to today's date (or future dates) in the same format
+4. Save the file
+5. Refresh the application in your browser
+
+Example change:
+```json
+"date": "2023-11-15"

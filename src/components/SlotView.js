@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const SlotsContainer = styled.div`
   position: relative;
   margin-top: 15px;
-  padding: 0 40px; /* Add padding to make space for arrows */
+  padding: 0 40px; 
 `;
 
 const SlotsGrid = styled.div`

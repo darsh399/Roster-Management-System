@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const CalendarWrapper = styled.div`
   display: grid;
-  grid-template-columns: 100px repeat(7, 1fr); /* left time column + 7 days */
+  grid-template-columns: 100px repeat(7, 1fr); 
   border: 1px solid #ddd;
   font-size: 14px;
   width: 100%;
@@ -36,7 +36,7 @@ const DayCell = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  height: 50px; /* larger size for readability */
+  height: 50px;
   background-color: ${({ status }) =>
     status === "online"
       ? "#28a745"
@@ -58,7 +58,6 @@ const DayCell = styled.div`
   }
 `;
 
-
 const formatAMPM = (hour) => {
   const ampm = hour >= 12 ? "PM" : "AM";
   const displayHour = hour % 12 || 12;
@@ -66,13 +65,11 @@ const formatAMPM = (hour) => {
 };
 
 const WeeklyCalendar = ({ provider, selectedWeekDates }) => {
- 
   const hours = [];
   for (let i = 8; i <= 24; i++) {
     hours.push(i);
   }
 
-  
   const getSlotStatus = (date, hour) => {
     const availability = provider.availabilities.find((a) => a.date === date);
     if (!availability) return null;
@@ -90,7 +87,6 @@ const WeeklyCalendar = ({ provider, selectedWeekDates }) => {
 
   return (
     <CalendarWrapper>
-  
       <TimeCell>Time</TimeCell>
       {selectedWeekDates.map((date, idx) => {
         const dayName = new Date(date).toLocaleDateString("en-US", { weekday: "short", day: "numeric" });
@@ -98,9 +94,7 @@ const WeeklyCalendar = ({ provider, selectedWeekDates }) => {
       })}
       {hours.map((hour) => (
         <React.Fragment key={hour}>
-    
           <TimeCell>{formatAMPM(hour)}</TimeCell>
-
           {selectedWeekDates.map((date, dayIdx) => (
             <DayCell key={`${dayIdx}-${hour}`} status={getSlotStatus(date, hour)} />
           ))}

@@ -6,6 +6,6 @@ export const loadProviders = () => (dispatch) => {
   try {
     dispatch({ type: LOAD_PROVIDERS, payload: providersData });
   } catch (err) {
-    console.error("Failed to load providers:", err);
+    console.error("Failed to load proviiders:", err);
   }
 };

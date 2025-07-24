@@ -427,6 +427,12 @@ const App = () => {
   const handlePrevWeek = () => setDateRangeIndex(prev => prev - 1);
   const handleNextWeek = () => setDateRangeIndex(prev => prev + 1);
   const toggleTheme = () => setDarkMode(!darkMode);
+  const handleClearAllFilters = () => {
+    setSearchTerm("");
+    setServiceFilter("");
+    setCenterFilter("");
+    setTypeFilter("");
+  };
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
@@ -441,12 +447,13 @@ const App = () => {
         
         <ContentWrapper>
           <LeftPanel>
-            <SearchBar onSearch={setSearchTerm} />
+            <SearchBar onSearch={setSearchTerm} searchTerm={searchTerm} />
             <FilterBar
               providers={providers}
               onServiceChange={setServiceFilter}
               onTypeChange={setTypeFilter}
               onCenterChange={setCenterFilter}
+              onClearAll={handleClearAllFilters}
             />
           </LeftPanel>
 
