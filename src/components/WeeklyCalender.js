@@ -96,14 +96,11 @@ const WeeklyCalendar = ({ provider, selectedWeekDates }) => {
         const dayName = new Date(date).toLocaleDateString("en-US", { weekday: "short", day: "numeric" });
         return <DayHeader key={idx}>{dayName}</DayHeader>;
       })}
-
-     
       {hours.map((hour) => (
         <React.Fragment key={hour}>
-        
+    
           <TimeCell>{formatAMPM(hour)}</TimeCell>
 
-        
           {selectedWeekDates.map((date, dayIdx) => (
             <DayCell key={`${dayIdx}-${hour}`} status={getSlotStatus(date, hour)} />
           ))}
