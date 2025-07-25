@@ -11,7 +11,7 @@
     },
     "availabilities": [
       {
-        "date": "2025-07-25",
+        "date": "2025-07-26",
         "online_slots": ["08:00", "08:15", "08:30"],
         "offline_slots": ["09:00", "09:15"],
         "both_slots": ["10:00", "10:15"],
@@ -33,7 +33,7 @@
     },
     "availabilities": [
       {
-        "date": "2025-07-25",
+        "date": "2025-07-26",
         "online_slots": ["10:00", "10:15", "10:30"],
         "offline_slots": ["11:00", "11:15"],
         "both_slots": ["12:00"],
@@ -55,7 +55,7 @@
     },
     "availabilities": [
       {
-        "date": "2025-07-25",
+        "date": "2025-07-26",
         "online_slots": ["14:00", "14:15", "14:30"],
         "offline_slots": ["15:00", "15:15"],
         "both_slots": ["16:00"],
